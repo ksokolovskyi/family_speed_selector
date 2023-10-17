@@ -1,0 +1,33 @@
+name: family_speed_selector
+description: Family Speed Selector made with Flutter
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.1.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: 2.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: 5.1.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/clock.svg
+    - assets/icons/fire.svg
+    - assets/icons/lightning.svg
+  
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Quicksand-Bold.ttf
+          weight: 700
