@@ -30,7 +30,7 @@ class _Demo extends StatefulWidget {
 }
 
 class _DemoState extends State<_Demo> {
-  var _speed = TransactionSpeed.normal;
+  TransactionSpeed _speed = TransactionSpeed.normal;
 
   @override
   Widget build(BuildContext context) {

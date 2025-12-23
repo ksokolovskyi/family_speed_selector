@@ -101,9 +101,7 @@ class _Title extends StatelessWidget {
               tween: Tween(
                 begin: const Offset(0, -0.5),
                 end: Offset.zero,
-              ).chain(
-                CurveTween(curve: _CustomSpringCurve()),
-              ),
+              ).chain(CurveTween(curve: _CustomSpringCurve())),
               weight: 50,
             ),
           ]).animate(animation);
@@ -141,18 +139,19 @@ class _Title extends StatelessWidget {
           ),
         );
       },
-      layoutBuilder: (
-        Widget? currentChild,
-        List<Widget> previousChildren,
-      ) {
-        return Stack(
-          alignment: Alignment.centerRight,
-          children: <Widget>[
-            ...previousChildren,
-            if (currentChild != null) currentChild,
-          ],
-        );
-      },
+      layoutBuilder:
+          (
+            Widget? currentChild,
+            List<Widget> previousChildren,
+          ) {
+            return Stack(
+              alignment: Alignment.centerRight,
+              children: <Widget>[
+                ...previousChildren,
+                ?currentChild,
+              ],
+            );
+          },
       child: Text(
         switch (speed) {
           TransactionSpeed.normal => 'Normal',
@@ -306,8 +305,7 @@ class _Icons extends StatelessWidget {
               shape: switch (speed) {
                 TransactionSpeed.fast => _IconShape.glyph,
                 TransactionSpeed.normal ||
-                TransactionSpeed.urgent =>
-                  _IconShape.circle,
+                TransactionSpeed.urgent => _IconShape.circle,
               },
               asset: 'assets/icons/lightning.svg',
               color: const Color(0xFFFEBE44),
@@ -370,10 +368,10 @@ class _IconState extends State<_Icon> with TickerProviderStateMixin {
   );
 
   double get _size => switch (widget.shape) {
-        _IconShape.smallCircle => 4.0,
-        _IconShape.circle => 8.0,
-        _IconShape.glyph => 16.0,
-      };
+    _IconShape.smallCircle => 4.0,
+    _IconShape.circle => 8.0,
+    _IconShape.glyph => 16.0,
+  };
 
   @override
   void initState() {
@@ -434,14 +432,14 @@ class _IconState extends State<_Icon> with TickerProviderStateMixin {
           dimension: size,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: widget.color.withOpacity(1 - opacity),
+              color: widget.color.withValues(alpha: 1 - opacity),
               shape: BoxShape.circle,
             ),
             child: SvgPicture.asset(
               widget.asset,
               fit: BoxFit.fitHeight,
               colorFilter: ui.ColorFilter.mode(
-                widget.color.withOpacity(opacity),
+                widget.color.withValues(alpha: opacity),
                 ui.BlendMode.srcIn,
               ),
             ),
@@ -454,12 +452,12 @@ class _IconState extends State<_Icon> with TickerProviderStateMixin {
 
 class _CustomSpringCurve extends Curve {
   _CustomSpringCurve()
-      : _simulation = SpringSimulation(
-          const SpringDescription(damping: 12, mass: 1, stiffness: 170),
-          0,
-          1,
-          0,
-        );
+    : _simulation = SpringSimulation(
+        const SpringDescription(damping: 12, mass: 1, stiffness: 170),
+        0,
+        1,
+        0,
+      );
 
   final SpringSimulation _simulation;
 
